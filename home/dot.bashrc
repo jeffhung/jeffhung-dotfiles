@@ -323,5 +323,7 @@ if [ -d "$HOME/wc/tcloud-issues" ]; then
 	export DITRACK_ROOT="$HOME/wc/tcloud-issues";
 fi;
 
-
+if [ -d ~/perl5/perlbrew ]; then
+	source ~/perl5/perlbrew/etc/bashrc
+fi;
 
