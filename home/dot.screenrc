@@ -1,0 +1,126 @@
+# ----------------------------------------------------------------------------
+# Amarganth Development Environment
+# Copyright (C) 2004, Jeff Hung
+# All rights reserved.
+# ----------------------------------------------------------------------------
+# $Date: 2006-08-22 14:01:55 +0800 (Tue, 22 Aug 2006) $
+# $Rev: 829 $
+# $Author: jeffhung $
+# ----------------------------------------------------------------------------
+# revid: "@(#) $Id: assert.sh 829 2006-08-22 06:01:55Z jeffhung $"
+# ----------------------------------------------------------------------------
+
+# Show matrix screensaver after 10 minutes inactivity
+blankerprg cmatrix
+#idle 600 blanker
+idle off
+
+# Select whether you want to see the copyright notice during
+# startup.  Default is `on', as you probably noticed.
+startup_message off
+
+vbell off
+#vbell_msg "[BEEP!!]"
+bell_msg 'Bell in window %n^G'
+
+# ----------------------------------------------------------------------------
+# Hardstatus line settings
+# ----------------------------------------------------------------------------
+
+#hardstatus alwayslastline '%{.bk}%?%-LW  %?%{..y}%n%f %t%{..k}%?%+LW%?%=%H %0C'
+hardstatus alwayslastline '%{.bY}[%H]%{.bR} %?%-LW  %?%{..W}%n%f %t%{.bR}%?%+LW%?%=%{.bY}%0c:%s'
+
+shelltitle '% |TCSH'
+
+# ----------------------------------------------------------------------------
+# Scrollback settings
+# ----------------------------------------------------------------------------
+
+# Set the size of the scrollback buffer for the current  windows  to  num
+# lines.  The  default scrollback is 100 lines.  See also the "defscroll-
+# back" command and use "C-a i" to view the current setting.
+scrollback 9000
+# Same  as the scrollback command except that the default setting for new
+# windows is changed. Initial setting is 100.
+defscrollback 9000
+
+# ----------------------------------------------------------------------------
+# Use 256 color
+# ----------------------------------------------------------------------------
+
+# Use bright colors for bold text.  Most terminal emulators do this already.
+attrcolor b ".I" 
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# Change default background-color-erase setting.  If "bce" is set to on, all
+# characters cleared by an erase/insert/scroll/clear operation will be
+# displayed in the current background color.  Otherwise the default background
+# color is used.
+defbce "on"
+#term screen-256color-bce
+
+# ----------------------------------------------------------------------------
+# remove some stupid / dangerous key bindings
+# ----------------------------------------------------------------------------
+
+# (kill) Destroy current window.
+bind k
+bind ^k
+# (dumptermcap) Write out a ".termcap" file.
+bind .
+# (quit) Kill all windows and terminate screen.
+bind ^\
+bind \\
+# (hardcopy) Write a hardcopy of the current window to the
+bind ^h
+bind h
+#make them better
+#bind 'K' kill
+#bind 'I' login on
+#bind 'O' login off
+#bind '}' history
+
+# ----------------------------------------------------------------------------
+# Encoding setting & switching
+# ----------------------------------------------------------------------------
+
+# Same  as the c1 command except that the default setting for new windows
+# is changed. Initial setting is `on'.
+defc1 off
+
+# jeffhung.20070426:
+# - new method: automatically switch between utf8/big5 mode while installing ~/.screenrc.
+# if (using utf8) {
+#<enc="utf8">   # Same as the encoding command except that the default  setting  for  new
+#<enc="utf8">   # windows is changed. Initial setting is the encoding taken from the ter-
+#<enc="utf8">   # minal.
+#<enc="utf8">   defencoding utf8
+#<enc="utf8">   # C-a b --(switch to)--> view big5 data
+#<enc="utf8">   bind b encoding big5 utf8 # convert big5 to utf8
+#<enc="utf8">   # C-a u --(switch to)--> view utf8 data
+#<enc="utf8">   bind u encoding utf8 utf8
+# } else {
+#<enc="big5">   # C-a b --(switch to)--> view big5 data
+#<enc="big5">   bind b encoding big5 big5
+#<enc="big5">   # C-a u --(switch to)--> view utf8 data
+#<enc="big5">   bind u encoding utf8 big5 # convert utf8 to big5
+# }
+
+# jeffhung.20070426: old method: menual switch between utf8/big5 mode.
+## Same as the encoding command except that the default  setting  for  new
+## windows is changed. Initial setting is the encoding taken from the ter-
+## minal.
+##defencoding utf8
+#
+## C-a b --(switch to)--> Big5
+##
+## if defencoding == utf8
+##bind b encoding big5 utf8
+## if defencoding == big5
+#bind b encoding big5 big5
+#
+## C-a u --(switch to)--> utf-8
+## if defencoding == utf8
+##bind u encoding utf8 utf8
+## if defencoding == big5
+#bind u encoding utf8 big5
+
