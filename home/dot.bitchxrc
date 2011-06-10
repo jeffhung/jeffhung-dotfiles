@@ -1,0 +1,105 @@
+#
+# .bitchxrc file original copied from http://bsdchat.com/.
+#
+
+set server_groups on
+set flood_protection off
+set kick_ops off
+#set log on
+set append_log on
+#set logfile ~/bitchxlogs/irc.log
+set auto_away off
+set display_ansi on
+#set join_new_window on
+#set join_new_window_type new hide swap last double on
+#set query_new_window on
+#set query_new_window_type new hide swap last double on
+set CLOSE_WINDOW_CLOSES_QUERY on
+set CLOSE_WINDOW_LEAVES_CHANNEL on
+#set dcc_autoget on
+set clock_24hour on
+set aop on
+cset aop * on
+set SEND_OP_MSG off
+set CHANMODE +nst
+#set mircs off
+set window_destroy_part on
+set hacking 0
+#set mangle_operlog reverse,underline,bold, blink,rom_char,nd_space,all_off
+set mangle_logfiles ALL_OFF
+set dcc_dldir ~/tmpo/bx
+set MAIL 0
+set WINDOW_QUIET ON
+set JOINFLOOD OFF
+set TIMESTAMP ON 
+set TIMESTAMP_STRING %m/%e %R 
+set XTERM_TITLE ON
+#set DISPLAY_ANSI OFF
+bind ^E END_OF_LINE
+bind ^B BACKWARD_CHARACTER
+bind ^F FORWARD_CHARACTER
+bind ^K ERASE_TO_END_OF_LINE
+bind ^H BACKSPACE
+
+ALIAS J {
+	if ( [$winvisible($0)] == -1) {
+		window new hide swap last double on split on
+		window LOGFILE ~/bitchxlogs/$0 LOG ON
+		window name $0
+	wset STATUS_FORMAT3 %-
+		JOIN $0 $1
+	}
+}
+
+ALIAS Q {
+	if ( [$querywin($0)] == -1) {
+		window new hide swap last double on
+		window LOGFILE ~/bitchxlogs/ppl/$0 LOG ON name $0
+		QUERY $0
+	}
+	MSG $0 $1
+}
+
+on -msg * {
+	if ( [$querywin($0)] == -1) {
+		window new hide swap last double on
+		window LOGFILE ~/bitchxlogs/ppl/$0 LOG ON name $0
+		QUERY $0
+	}
+}
+
+FSET SEND_PUBLIC %@%P<%n$2%P>%n $3-
+FSET SEND_MSG %@%K[%rTo%K(%R$1%K)] %n$3-
+FSET MSG %@%K[%pFrom%K(%P$1%K)]%n $3-
+FSET SEND_ACTION %@%K* %W$1 %n$3-
+FSET ACTION_USER %@%K* %Y$1 %n$4-
+FSET ACTION_OTHER %@%K* %Y$1 %n$4-
+FSET ACTION_CHANNEL %@%K* %Y$1 %n$4-
+FSET CHANNEL_SIGNOFF %@$G %nSignOff %W$1%n: $3 %K(%n$4-%K)
+FSET FRIEND_JOIN %@$G %R$1 %K[%c$2%K]%n has joined $3
+FSET JOIN %@$G %C$1 %K[%c$2%K]%n has joined $3
+FSET NETJOIN %@$G %nNetjoined: %W$1 $2
+FSET NICKNAME %@$G %W$1 %nis now known as %c$3
+FSET NICKNAME_OTHER %@$G %W$1 %nis now known as %c$4
+#FSET NICKNAME_USER %K>%n>%W> %WYou%K(%n$1%K)%n are now known as %c$3
+FSET LEAVE %@$G $1 %K[%w$2%K]%n has left $3 %K[%W$4-%K]
+FSET MODE %@$G %nmode%K/%c$3 %K[%W$4-%K]%n by %W$1
+FSET MODE_CHANNEL %@$G %nmode%K/%c$3 %K[%W$4-%K]%n by %W$1
+FSET SMODE %@$G %RServerMode%K/%c$3 %K[%W$4-%K]%n by %W$1
+FSET USERMODE %@$G %nMode change %K[%W$4-%K]%n for user %c$3
+FSET TOPIC_CHANGE %@$G Topic %K(%c$2%K):%n changed by %c$1%K:%n $3-
+FSET NETSPLIT %@$G %nNetSplit: %W$1%n split from %W$2 %K[%c$0%K]
+
+# SERVER [ircn]
+# please look into ~/.ircservers
+# how to assign NICK for you server ?
+# simple format of ~/.ircservers
+# server:6667::nick:ircn
+
+window name servermsg
+
+load ~/.ircfriends
+# simple sample of  ~/.ircfriends
+# ADDUSER *!*@fatpipi.cirx.org #bsdchat FRIEND,REOP,VOICE
+
+

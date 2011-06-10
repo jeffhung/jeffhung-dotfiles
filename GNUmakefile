@@ -1,12 +1,29 @@
 UENV_DOT_FILES =# list of ~/.* files to install
 UENV_DOT_FILES += $(HOME)/.bashrc
+UENV_DOT_FILES += $(HOME)/.bitchxrc
+UENV_DOT_FILES += $(HOME)/.cshrc
 UENV_DOT_FILES += $(HOME)/.ctags
 UENV_DOT_FILES += $(HOME)/.gitignore
 UENV_DOT_FILES += $(HOME)/.indent.pro
+UENV_DOT_FILES += $(HOME)/.inputrc
 UENV_DOT_FILES += $(HOME)/.logmonrc
+UENV_DOT_FILES += $(HOME)/.muttrc
 UENV_DOT_FILES += $(HOME)/.nexrc
 UENV_DOT_FILES += $(HOME)/.uncrustify.cfg
 UENV_DOT_FILES += $(HOME)/.screenrc
+UENV_DOT_FILES += $(HOME)/.todorc
+                 # for FreeBSD
+UENV_DOT_FILES +=#$(HOME)/.Xdefaults
+UENV_DOT_FILES +=#$(HOME)/.fonts.conf
+UENV_DOT_FILES +=#$(HOME)/.gtkrc.mine
+UENV_DOT_FILES +=#$(HOME)/.login
+UENV_DOT_FILES +=#$(HOME)/.logout
+UENV_DOT_FILES +=#$(HOME)/.mailcap
+UENV_DOT_FILES +=#$(HOME)/.mailrc
+UENV_DOT_FILES +=#$(HOME)/.xinitrc
+UENV_DOT_FILES +=#$(HOME)/.xsession
+                 # for Win32
+UENV_DOT_FILES +=#$(HOME)/.cshrc.win32
 
 UENV_ENABLE_PERLBREW = yes
 

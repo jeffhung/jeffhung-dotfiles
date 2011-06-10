@@ -1,0 +1,4 @@
+if ( $?DISPLAY_ORI  ) then
+	xapp.sh --unregister "$DISPLAY_ORI";
+endif
+

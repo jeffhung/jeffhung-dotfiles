@@ -1,0 +1,15 @@
+style "default" {
+	fontset = "8x16,kc15f,-*-16-*-big5-0"
+}
+widget_class "*" style "default"
+
+style "gtk-default-zh-tw" {
+	fontset = "\
+		-DynaLab-MingLiU-medium-r-normal--16-*-*-*-c-*-big5-0,\
+		-AR PL Mingti2L Big5-medium-r-normal-*-*-120-*-*-p-*-big5-0,\
+		-adobe-helvetica-medium-r-normal--16-*-*-*-*-*-iso8859-1,\
+		-*-medium-r-normal--16-*-*-*-*-*-big5-0,-*-big5-0\
+	"
+}
+class "GtkWidget" style "gtk-default-zh-tw"
+
