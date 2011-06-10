@@ -1,15 +1,3 @@
-# ----------------------------------------------------------------------------
-# Amarganth Development Environment
-# Copyright (C) 2004, Jeff Hung
-# All rights reserved.
-# ----------------------------------------------------------------------------
-# $Date: 2006-08-22 14:01:55 +0800 (Tue, 22 Aug 2006) $
-# $Rev: 829 $
-# $Author: jeffhung $
-# ----------------------------------------------------------------------------
-# revid: "@(#) $Id: assert.sh 829 2006-08-22 06:01:55Z jeffhung $"
-# ----------------------------------------------------------------------------
-
 # Show matrix screensaver after 10 minutes inactivity
 blankerprg cmatrix
 #idle 600 blanker
