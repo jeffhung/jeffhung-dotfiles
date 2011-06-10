@@ -1,6 +1,11 @@
 UENV_DOT_FILES =# list of ~/.* files to install
 UENV_DOT_FILES += $(HOME)/.bashrc
+UENV_DOT_FILES += $(HOME)/.ctags
 UENV_DOT_FILES += $(HOME)/.gitignore
+UENV_DOT_FILES += $(HOME)/.indent.pro
+UENV_DOT_FILES += $(HOME)/.logmonrc
+UENV_DOT_FILES += $(HOME)/.nexrc
+UENV_DOT_FILES += $(HOME)/.uncrustify.cfg
 UENV_DOT_FILES += $(HOME)/.screenrc
 
 UENV_ENABLE_PERLBREW = yes

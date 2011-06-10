@@ -1,0 +1,77 @@
+# ----------------------------------------------------------------------------
+# Amarganth Development Environment
+# Copyright (C) 2004, Jeff Hung
+# All rights reserved.
+# ----------------------------------------------------------------------------
+# $Date: 2006-09-01 10:15:37 +0800 (Fri, 01 Sep 2006) $
+# $Rev: 875 $
+# $Author: jeffhung $
+# ----------------------------------------------------------------------------
+# revid: "@(#) $Id: dot.login 875 2006-09-01 02:15:37Z jeffhung $"
+# ----------------------------------------------------------------------------
+
+# Example logmonrc.
+# Copy this to $HOME/.logmonrc or /etc/logmon.conf
+
+# NOTE: Order *does* matter.
+
+# Format:
+# <action>:filename:regex
+#
+# Action can be one of the following
+# ignore - Don't show any lines that match the regex.
+# color - Color anything matching the regex.
+#
+# Ignore can have multiple regular expressions separated by comma's.  Colors
+# cannot at the moment (Vers. 0.4.0).
+#
+# Colors can be:
+# red
+# green
+# blue
+# yellow
+# magenta
+# cyan
+# black
+# white
+
+######################
+# /var/log/messages. #
+######################
+# Date
+magenta:messages:^... ..
+# Time
+cyan:messages:..:..:..
+# HostName
+yellow:messages:^... .. ..:..:.. *[A-Za-z]* 
+# Program Name
+blue:messages:^... .. ..:..:.. *[A-Za-z]* [^ ]*:
+
+##################################
+# Apache combined_log formating. #
+##################################
+# Ignore
+ignore:combined_log:localhost,localdomain
+# From
+yellow:combined_log:^[a-zA-Z0-9\.\-]*
+# Date
+magenta:combined_log:\[..........................\]
+# Request
+green:combined_log:"[^"]*"
+# Return code and size
+red:combined_log: [0-9]* [-0-9]* 
+# Referer
+cyan:combined_log:"[^"]*"{1}[ 0-9]*"[^"]*"
+# Agent
+blue:combined_log:"[^"]*".*"[^"]*"
+
+##################################
+# Twistd log fomating.           #
+##################################
+
+cyan:twistd.log:^..../../.. ..:.. ... \[HTTPChannel.*\].*$
+cyan:twistd.log:^..../../.. ..:.. ... \[-\] sending app-level keepalive.*$
+magenta:twistd.log:^..../../.. ..:.. ... \[-\] .*$
+red:twistd.log:^..../../.. ..:.. ... \[.*\] Traceback .*$
+red:twistd.log:^	.*$
+
