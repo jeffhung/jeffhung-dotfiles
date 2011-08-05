@@ -1,0 +1,254 @@
+# ----------------------------------------------------------------------------
+# Bind keys
+#
+# Quote from WindowsReadme.1st that boundled with TCSH-win32 package:
+#
+# To use keys like function keys, arrows, insert, etc., the following form of
+# bindkey must be used:
+#
+# bindkey -b N-xxx <command>
+#
+# where xxx is either:
+#
+# a) A number from 1 through 24, representing the fucntion keys.
+#    For example, bindkey -b N-1 run-help
+#
+# b) The strings "pgup","pgdown","end","home", "left","up","right","down",
+#    "ins","del"
+#    For example, bindkey -b N-del delete-char
+#
+# Here are the bindings I use in my .tcshrc:
+#
+#   # NT specific bindkey extensions
+#   bindkey -b N-up up-history
+#   bindkey -b N-down down-history
+#   bindkey -b N-right forward-char
+#   bindkey -b N-left backward-char
+#   bindkey -b N-del delete-char
+#   bindkey -b N-ins overwrite-mode
+#   bindkey -b N-1 which-command
+#   bindkey -b N-2 expand-history
+#   bindkey -b N-3 complete-word-raw
+#   bindkey -b N-home beginning-of-line
+#   bindkey -b N-end end-of-line
+#
+#   bindkey -b N-pgup e_page_up
+#   bindkey -b N-pgdown e_page_down
+#
+# (Note that on Win9x, you must set your console window to NOT be Auto-sized,
+# and you must use the "settc" builtin to increase and then reduce back the
+# number of lines, in order to get a scrollbar. pgup and pgdown will not work
+# without a scroll bar)
+#
+# To bind ctrl or alt combinations, use the following as examples.  (Alt on PC
+# keyboards is treated as the Meta on Unix keyboards)
+#
+#   bindkey -b N-C-left backward-word
+#   bindkey -b N-M-right forward-word
+#
+# For Shift combinations:
+#
+#   bindkey -b N-S-1 backward-word
+#
+# [Clipboard support]
+#
+# You can also cut and paste to and from the clipboard directly from the
+# shell.  To do this, use bindings like the following:
+#
+#   bindkey -b M-x e_copy_to_clipboard
+#   bindkey -b M-y e_paste_from_clipboard
+# 
+# Then, to paste text from the clipboard into the current input line, you can
+# type:
+#   M-y
+# And to copy the current shell's kill buffer to the clipboard,
+#   M-x
+#
+# (The kill buffer contains the last deletion from an editing command. Sort of
+# like an 'undo' buffer).
+#
+# You can also use the clipboard to redirect I/O, with /dev/clipboard as the
+# destination/source file.
+#
+# [Editor Functions]
+#
+# e_dosify_next
+# -------------
+#     A key bound to this editor function can be used to convert unix-style
+#     paths to DOS-style paths.
+# 
+#     For example,
+# 
+#         bindkey -b M-/ e_dosify_next
+# 
+#     Then, if I had line like so:
+# 
+#         xcopy /e /u c:/nt40/system32
+# 
+#     I would move the cursor to the C: and hit alt-/. magically, the command
+#     line changes to
+# 
+#         xcopy /e /u c:\\nt40\\system32
+# 
+#     This function converts every '/' to '\\' until the first space.  If the
+#     space is escaped by a '\', the function looks for the next space.
+# 
+# e_dosify_prev
+# -------------
+#     Works like above, but on the previous word. 
+# 
+# e_page_up
+# ---------
+#     Editor function to move console window up one page. Can be bound to
+#     PageUp key, for example.
+# 
+# e_page_down
+# ----------
+#     Ditto for page down.
+# 
+# e_copy_to_clipboard
+# -------------------
+#     See Clipboard Support above.
+# 
+# e_paste_from_clipboard
+# -----------------------
+#     See Clipboard Support above.
+#
+# e_dosify_next
+# -------------
+#     A key bound to this editor function can be used to convert 
+#     unix-style paths to DOS-style paths.
+#
+#     For example,
+#
+#         bindkey -b M-/ e_dosify_next
+#
+#     Then, if I had line like so:
+#
+#         xcopy /e /u c:/nt40/system32
+#
+#     I would move the cursor to the C: and hit alt-/. magically, the 
+#     command line changes to
+#
+#         xcopy /e /u c:\\nt40\\system32
+#
+#     This function converts every '/' to '\\' until the first space. 
+#     If the space is escaped by a '\', the function looks for the 
+#     next space.
+#
+# e_dosify_prev
+# -------------
+#     Works like above, but on the previous word. 
+#
+# ----------------------------------------------------------------------------
+
+bindkey	-b	N-up      up-history
+bindkey	-b	N-down    down-history
+bindkey	-b	N-right   forward-char
+bindkey	-b	N-left    backward-char
+bindkey	-b	N-del     delete-char
+bindkey	-b	N-ins     overwrite-mode
+bindkey	-b	N-1       which-command
+bindkey	-b	N-2       expand-history
+bindkey	-b	N-3       complete-word-raw
+bindkey	-b	N-home    beginning-of-line
+bindkey	-b	N-end     end-of-line
+bindkey	-b	N-pgup    e_page_up
+bindkey	-b	N-pgdown  e_page_down
+bindkey	-b	N-C-left  backward-word
+bindkey	-b	N-M-right forward-word
+bindkey	-b	N-S-1     backward-word
+#jeffhung.20050120: dosify functions seems not working.
+#bindkey	-b	M-/       e_dosify_prev
+#bindkey	-b	M-\       e_dosify_next
+
+# ----------------------------------------------------------------------------
+# Some tuning to csh/tcsh to make it more convinent.
+# ----------------------------------------------------------------------------
+
+# If set, completion completes  on  an  exact  match even if a longer
+# match is possible.
+set	recexact
+
+# If set, possibilities are listed after an  ambiguous completion.  If
+# set to `ambiguous', possibilities are listed only when no new
+# characters are added by completion.
+set	autolist
+
+# The  first  word is the number of minutes of inactivity before auto-
+# matic logout.  The optional second  word  is  the number of minutes of
+# inactivity before automatic locking.
+#set	autologout = (60 30)
+set	matchbeep = ambiguous
+set	autoexpand
+set	ignoreeof
+set	noclobber
+set	notify
+set	correct = cmd
+if ( ! ${?WINDOW} ) then
+	set	prompt = "\n%S%m%s:[%B`whoami`%b][%~]\n[%h]% "
+else
+	set	prompt = "\n%S%m%s:[%B`whoami`%b:%B$WINDOW%b][%~]\n[%h]%{\ek\e\\%}%% "
+endif
+set	prompt3 = "%BDo you mean [%R] (y/n/e) ?%b "
+set	history = 500
+set	savehist = 500
+set	time = 100
+set	symlinks = ignore
+set	listlinks
+set	listjobs
+#set	rmstar
+set	showdots
+#set	color
+
+# ----------------------------------------------------------------------------
+
+# Putty use .ppk as filename extension for private key files.
+setenv SVN_SSH   "ssh -i ${HOME}/.ssh/id_dsa-svn.ppk"
+setenv RSYNC_RSH "ssh -i ${HOME}/.ssh/id_dsa-svn.ppk"
+
+# Set to 'insert' mode. Possible values 'insert' or 'overwrite'.
+# By default, we are in "insert" mode.
+set inputmode=insert
+
+# If the exit value is non-zero, print it.
+# Very handy when you do scripting.
+set printexitvalue
+
+# Ask for confirmation when 'rm *'.
+set rmstar
+
+# Use ls --help to see descriptions for each option.
+alias	ls          'ls --classify --literal --show-control-chars';
+alias	see         'more -x4';
+alias	rm          'rm --interactive';
+alias	mv          'mv --interactive';
+alias	cp          'cp --interactive --preserve';
+alias	gzip        'gzip --verbose';
+
+alias	evim        'C:/Windows/evim.bat';
+alias	gvimdiff    'C:/Windows/gvimdiff.bat';
+alias	vimdiff     'C:/Windows/vimdiff.bat';
+alias	gview       'C:/Windows/gview.bat';
+alias	view        'C:/Windows/view.bat';
+alias	gvim        'C:/Windows/gvim.bat';
+alias	vim         'C:/Windows/vim.bat';
+alias	vi          'C:/Windows/gvim.bat';
+
+alias	gmake       'C:/MinGW/bin/mingw32-make.exe';
+
+if ( -x C:/usr/bin/ctags.exe ) then
+	# We have exuberant-ctags installed.
+	setenv	CTAGS	'--c-kinds=+lpx --c++-kinds=+lpx --fields=+ailmS --extra=+fq'
+	setenv	ETAGS	"$CTAGS"
+	alias	exctags	ctags
+endif
+
+# jeffhung.20081114: cannot work
+#if ( -x C:/Perl/bin/perl.exe ) then
+#	if ( $?TCSHSUBSTHB != '1' ) then
+#		setenv TCSHSUBSTHB '';
+#	endif
+#	setenv TCSHSUBSTHB "${TCSHSUBSTHB}/usr/bin/perl C:/Perl/bin/perl.exe;";
+#endif
+

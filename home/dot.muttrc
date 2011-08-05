@@ -1,0 +1,143 @@
+#
+# Email settings
+#
+#set			from     = "Chien-Chou Hung <jeffhung.iim90g@nctu.edu.tw>"
+set				from     = "Jeff Hung <jeffhung@mail2000.com.tw>"
+#set			hostname = "jeffhung.idv.tw"
+
+#
+#
+#
+
+mailboxes		`echo $MAIL` `find ~/Mail -type f -not -name '*.log' | xargs`
+set				quit                = ask-no
+set				copy                = yes        # Ask me if I want to save a copy of my outgoing messages.
+set				record              = +sent-mail # where to save copies of my outgoing messages
+set				move                = no         # Don't move read message to mbox file. (skip confirm)
+set				mime_forward        = ask-yes
+set				bbsislame           = yes
+set				pager_index_lines   = "10"
+set				postponed           = "/home/jeffhung/Mail/draft"
+
+#
+# locale settings
+#
+
+# @see http://wiki.rafan.org/doc/utf8note#chinesemutt
+# jeffhung.20070506:
+# - Do not set charset and locale, mutt will now use LANG environment variable
+#   automatically.
+#set				charset             = utf8
+#set				locale              = "zh_TW.UTF-8"
+#set				send_charset        = "us-ascii:iso-8859-1:big5:gb2312:utf-8:x-unknown"
+set				send_charset        = "us-ascii:iso-8859-1:big5:gb2312:utf-8"
+charset-hook	us-ascii            big5
+charset-hook	iso-8859-1          big5
+set				assumed_charset		= "big5:gb2312:utf-8"
+set				ascii_chars			= yes
+
+set				rfc2047_parameters	= yes # Handle attachment encoding when viewing.
+
+#
+# PGP settings
+#
+#pgp_autosign             yes
+#pgp_autoencrypt          no
+#pgp_ignore_subkeys       yes
+#pgp_entry_format         "%4n %t%f %4l/0x%k %-4a %2c %u"
+#pgp_good_sign            ""
+#pgp_long_ids             no
+#pgp_replyencrypt         yes
+#pgp_replysign            yes
+#pgp_replysignencrypted   no
+#pgp_retainable_sigs      no
+#pgp_show_unusable        no
+#pgp_sign_as              ""
+#pgp_strict_enc           yes
+#pgp_timeout              300
+#pgp_verify_sig           ask-yes
+#pgp_sort_keys            address
+#pgp_create_traditional   no
+#pgp_decode_command       "pgp -d"
+#pgp_getkeys_command      "pgp -kv"
+#pgp_verify_command       ""
+#pgp_decrypt_command      "pgp -d"
+#pgp_clearsign_command    ""
+#pgp_sign_command         "pgp -s"
+#pgp_encrypt_sign_command "pgp -se"
+#pgp_encrypt_only_command "pgp -e"
+#pgp_import_command       ""
+#pgp_export_command       ""
+#pgp_verify_key_command   "pgp -d"
+#pgp_list_secring_command ""
+#pgp_list_pubring_command ""
+
+
+#
+# Color settings
+#
+color	header		green	black	"^.*$"
+#color	header		yellow	black	"^Subject: .*$"
+color	quoted		cyan	black
+
+#
+#
+#
+
+#
+# header settings
+#
+ignore		"*"
+unignore	"From:" "To" "Subject" "Date" "Organization" "Importance"
+hdr_order	"From:" "To" "Subject" "Date" "Organization" "Importance"
+
+#
+# Sort settings
+#
+#set	sort="threads"
+set	sort="date"
+set	sort_aux="date"
+
+#
+# Address Book integration
+#
+set	query_command="mutt_vc_query '%s'"
+#set	query_command="abook --mutt-query '%s'"
+#macro 	pager	A	"|'abook --add-email'"
+#source	~/.mail_aliases
+
+# Use ESC-V to mark all read.
+# @author evi1c@bsdchat
+macro	index	"<esc>v"	'<tag-pattern>~A<enter>;<clear-flag>N<untag-pattern>~A<enter>'	'mark all read'
+
+# Use ESC-T to tag all.
+macro	index	"<esc>T"	'<tag-pattern>~A<enter>'	'tag all'
+
+#
+# Use <tab> to toggle between index/browser views.  (index: mail list, browser: mailbox/folder list)
+# @sa http://wiki.mutt.org/?MuttFaq/Command
+#
+macro	index	<tab>	'<change-folder>?<toggle-mailboxes>'
+macro	browser	<tab>	'<select-entry>'
+macro	index	q		'<quit>'
+#macro	browser	q		'<select-entry>' # Force to exit only in index view.
+# In browser view, use the same key as the <sync-mailbox> function in index
+# view to check new mails.
+macro	browser	$		'<check-new>'
+macro	index	[		'<previous-unread>'
+macro	index	]		'<next-unread>'
+macro	index	s		'<save-message>?'
+
+#
+# Initial commands:
+#
+
+# jeffhung.20051205:
+# - There's no <show-version> command in browser view.  If we launch mutt with
+#   the -y option, an error will be raised.
+#push	'<show-version>'                       # show version on startup
+
+# jeffhung.20051205:
+# - This is less preferred, since this will eliminate the unread mark of INBOX.
+#push	'<change-folder>?<toggle-mailboxes>' # initially goes to mailbox list.
+

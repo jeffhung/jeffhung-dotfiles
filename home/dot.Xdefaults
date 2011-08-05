@@ -1,0 +1,249 @@
+! ~/.Xdefaults for FreeBSD.
+
+
+! Setting Defaults for all X applications
+!.defaultCharset:    		big5
+!.inputmethod:			gcin
+!.localeCharset*zh_TW.BIG5:      big5
+!.multichar_encoding:            big5
+!.preeditType:			OverTheSpot
+
+.defaultCharset:				utf8
+.multichar_encoding:			utf8
+.inputmethod:					gcin
+.preeditType:					OverTheSpot
+
+! Begin ports/chinese/rxvt-big5 and ports/chinese/rxvt configuration
+rxvt.borderColor:              black
+rxvt.background:               black
+rxvt.backspacekey:             "^H"
+rxvt.cursorColor:              IndianRed
+rxvt.foreground:               gray98
+rxvt.geometry:                 80x24
+rxvt.inputMethod:              xcin
+rxvt.multibyte_cursor:	       yes
+rxvt.multichar_encoding:       big5
+rxvt.preeditType:	       OverTheSpot
+rxvt.scrollTtyKeypress:        True
+rxvt.scrollTtyOutput:          False
+rxvt.scrollBar_right:          True
+rxvt.termName:                 xterm-color
+rxvt.troughColor:              black
+!您可選擇想要的字體大小
+! 國喬 16pt, 國喬 16pt
+rxvt.font:                     8x16
+rxvt.mfont:                    kc15f
+! Clean 16pt, 文鼎細明體16pt
+!rxvt.font:                    -schumacher-clean-medium-r-normal-*-*-160-*-*-c-*-iso8859-1
+!rxvt.mfont:                   -ar-ming-medium-r-normal-*-*-160-*-*-c-*-big5-0
+! Clean 12pt, 文鼎細明體12pt
+!rxvt.font:                    -schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso8859-1
+!rxvt.mfont:                   -ar-ming-medium-r-normal-*-*-120-*-*-c-*-big5-0
+! 國喬 24pt, 國喬 24pt
+!rxvt.font:                    kc12x24
+!rxvt.mfont:                   kc24f
+! End ports/chinese/rxvt-big5 and ports/chinese/rxvt configuartion
+
+!! Begin ports/x11/rxvt-unicode configuartion
+!urxvt.borderColor:              black
+!urxvt.background:               black
+!urxvt.backspacekey:             "^H"
+!urxvt.cursorColor:              IndianRed
+!urxvt.foreground:               gray98
+!urxvt.geometry:                 80x25
+!urxvt.inputMethod:              xcin
+!urxvt.multibyte_cursor:	       yes
+!urxvt.multichar_encoding:       big5
+!urxvt.preeditType:	       OverTheSpot
+!urxvt.scrollTtyKeypress:        True
+!urxvt.scrollTtyOutput:          False
+!urxvt.scrollBar_right:          True
+!urxvt.termName:                 xterm-color
+!urxvt.troughColor:              black
+!!您可選擇想要的字體大小
+!! 國喬 16pt, 國喬 16pt
+!urxvt.font:                     8x16
+!urxvt.mfont:                    kc15f
+!! Clean 16pt, 文鼎細明體16pt
+!!urxvt.font:                    -schumacher-clean-medium-r-normal-*-*-160-*-*-c-*-iso8859-1
+!!urxvt.mfont:                   -ar-ming-medium-r-normal-*-*-160-*-*-c-*-big5-0
+!! Clean 12pt, 文鼎細明體12pt
+!!urxvt.font:                    -schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso8859-1
+!!urxvt.mfont:                   -ar-ming-medium-r-normal-*-*-120-*-*-c-*-big5-0
+!! 國喬 24pt, 國喬 24pt
+!!urxvt.font:                    kc12x24
+!!urxvt.mfont:                   kc24f
+!! End ports/x11/rxvt-unicode configuartion
+
+!! rafan's urxvt setting: http://rafan.infor.org/conf/urxvt.conf
+!! @see http://wiki.rafan.org/doc/utf8note
+urxvt.background: black
+urxvt.foreground: light gray
+urxvt.cursorColor: IndianRed
+!urxvt.geometry: 80x30
+urxvt.geometry: 143x50
+urxvt.scrollBar_right: true
+
+urxvt.font: \
+	xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true,\
+	xft:ar pl new sung:pixelsize=16:style=Roman,\
+	xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull,\
+	xft:Terminus:pixelsize=12pt:antialias=true:encoding=iso8859-1,\
+	-isas-fangsong ti-medium-r-normal--24-240-72-72-c-240-gb2312.1980-0,\
+	-jis-fixed-medium-r-normal--24-230-75-75-c-240-jisx0248.1983-0,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-1,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-2,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-1,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-2,\
+	-aliasmic-ming(for iso10646)-medium-r-normal--16-160-0-0-p-160-gbk-0,\
+	-aliasarphic-ar pl mingti2l big5-medium-i-normal--24-240-0-0-p-240-iso10646-1,\
+	xft:Arial Unicode MS:pixelsize=12pt:antialias=true
+urxvt.boldFont: \
+	xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true,\
+	xft:ar pl new sung:pixelsize=16:style=Roman,\
+	xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull,\
+	xft:Terminus:pixelsize=12pt:antialias=true:encoding=iso8859-1,\
+	-isas-fangsong ti-medium-r-normal--24-240-72-72-c-240-gb2312.1980-0,\
+	-jis-fixed-medium-r-normal--24-230-75-75-c-240-jisx0248.1983-0,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-1,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-2,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-1,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-2,\
+	-aliasmic-ming(for iso10646)-medium-r-normal--16-160-0-0-p-160-gbk-0,\
+	-aliasarphic-ar pl mingti2l big5-medium-i-normal--24-240-0-0-p-240-iso10646-1,\
+	xft:Arial Unicode MS:pixelsize=12pt:antialias=true
+urxvt.italicFont: \
+	xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true,\
+	xft:ar pl new sung:pixelsize=16:style=Roman,\
+	xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull,\
+	xft:Terminus:pixelsize=12pt:antialias=true:encoding=iso8859-1,\
+	-isas-fangsong ti-medium-r-normal--24-240-72-72-c-240-gb2312.1980-0,\
+	-jis-fixed-medium-r-normal--24-230-75-75-c-240-jisx0248.1983-0,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-1,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-2,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-1,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-2,\
+	-aliasmic-ming(for iso10646)-medium-r-normal--16-160-0-0-p-160-gbk-0,\
+	-aliasarphic-ar pl mingti2l big5-medium-i-normal--24-240-0-0-p-240-iso10646-1,\
+	xft:Arial Unicode MS:pixelsize=12pt:antialias=true
+urxvt.boldItalicFont: \
+	xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true,\
+	xft:ar pl new sung:pixelsize=16:style=Roman,\
+	xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull,\
+	xft:Terminus:pixelsize=12pt:antialias=true:encoding=iso8859-1,\
+	-isas-fangsong ti-medium-r-normal--24-240-72-72-c-240-gb2312.1980-0,\
+	-jis-fixed-medium-r-normal--24-230-75-75-c-240-jisx0248.1983-0,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-1,\
+	-hku-fixed-medium-r-normal--16-160-72-72-c-160-cns11643.1992-2,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-1,\
+	-misc-fixed-medium-r-normal--16-150-75-75-c-160-jisx0213.2400-2,\
+	-aliasmic-ming(for iso10646)-medium-r-normal--16-160-0-0-p-160-gbk-0,\
+	-aliasarphic-ar pl mingti2l big5-medium-i-normal--24-240-0-0-p-240-iso10646-1,\
+	xft:Arial Unicode MS:pixelsize=12pt:antialias=true
+!urxvt.backspacekey:	
+urxvt.title:	urxvt
+!urxvt.imlocale: zh_TW.Big5
+!urxvt.cutchars:		`"'(),;[]{|}
+
+!urxvt.color0:		#000000
+!urxvt.color1:		#BB0000
+!urxvt.color2:		#00BB00
+!urxvt.color3:		#BBBB00
+!urxvt.color4:		#0000BB
+!urxvt.color5:		#BB00BB
+!urxvt.color6:		#00BBBB
+!urxvt.color7:		#BBBBBB
+!urxvt.color8:		#555555
+!urxvt.color9:		#FF5555
+!urxvt.color10:		#55FF55
+!urxvt.color11:		#FFFF55
+!urxvt.color12:		#5555FF
+!urxvt.color13:		#FF55FF
+!urxvt.color14:		#55FFFF
+!urxvt.color15:		#FFFFFF
+
+!urxvt.colorBD:		white
+!urxvt.cutchars:	BACKSLASH `"'&()*,;<=>?@[]{|}
+!urxvt.cutchars:	\`"'()*;<>@[]{|}
+urxvt.cutchars:		\`"'()*;<>@[]{|}
+urxvt.print-pipe: 	>/dev/null
+urxvt.urlLauncher:	firefox
+!urxvt.perl-ext-common:	default,mark-urls
+urxvt.termName:		xterm-color
+urxvt.inputMethod:	gcin
+
+
+! Begin ports/chinese/aterm configuration
+aterm.borderColor:              black
+aterm.background:               black
+aterm.backspacekey:             "^H"
+aterm.cursorColor:              IndianRed
+aterm.foreground:               gray98
+aterm.geometry:                 80x24
+aterm.inputMethod:              xcin
+aterm.multichar_encoding:       big5
+aterm.preeditType: 		OverTheSpot
+aterm.scrollTtyKeypress:        True
+aterm.scrollTtyOutput:          False
+aterm.scrollBar_right:          True
+aterm.shading:			30
+aterm.termName:                 xterm-color
+aterm.transparent: True
+aterm.transpscrollbar: True
+aterm.troughColor:              black
+!您可選擇想要的字體大小
+! 國喬 16pt, 國喬 16pt 
+aterm.font:                     8x16
+aterm.mfont:                    kc15f
+! Clean 16pt, 文鼎細明體16pt
+!aterm.font:                    -schumacher-clean-medium-r-normal-*-*-160-*-*-c-*-iso8859-1
+!aterm.mfont:                   -ar-ming-medium-r-normal-*-*-160-*-*-c-*-big5-0
+! Clean 12pt, 文鼎細明體12pt
+!aterm.font:                    -schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso8859-1
+!aterm.mfont:                   -ar-ming-medium-r-normal-*-*-120-*-*-c-*-big5-0
+! 國喬 24pt, 國喬 24pt
+!aterm.font:                    kc12x24
+!aterm.mfont:                   kc24f
+! End ports/chinese/aterm configuartion
+
+! Begin ports/print/xpdf configuration
+xpdf.paperColor: #fcfcfc
+xpdf.background: #b8b8b8
+xpdf.font:  -adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1
+! must install ports/print/gsfonts or comment follow
+xpdf.t1TimesRoman:           /usr/local/share/ghostscript/fonts/n021003l.pfb
+xpdf.t1TimesItalic:          /usr/local/share/ghostscript/fonts/n021023l.pfb
+xpdf.t1TimesBold:            /usr/local/share/ghostscript/fonts/n021004l.pfb
+xpdf.t1TimesBoldItalic:      /usr/local/share/ghostscript/fonts/n021024l.pfb
+xpdf.t1Helvetica:            /usr/local/share/ghostscript/fonts/n019003l.pfb
+xpdf.t1HelveticaOblique:     /usr/local/share/ghostscript/fonts/n019023l.pfb
+xpdf.t1HelveticaBold:        /usr/local/share/ghostscript/fonts/n019004l.pfb
+xpdf.t1HelveticaBoldOblique: /usr/local/share/ghostscript/fonts/n019024l.pfb
+xpdf.t1Courier:              /usr/local/share/ghostscript/fonts/n022003l.pfb
+xpdf.t1CourierOblique:       /usr/local/share/ghostscript/fonts/n022023l.pfb
+xpdf.t1CourierBold:          /usr/local/share/ghostscript/fonts/n022004l.pfb
+xpdf.t1CourierBoldOblique:   /usr/local/share/ghostscript/fonts/n022024l.pfb
+xpdf.t1Symbol:               /usr/local/share/ghostscript/fonts/s050000l.pfb
+xpdf.t1ZapfDingbats:         /usr/local/share/ghostscript/fonts/d050000l.pfb
+xpdf.t1libControl: high
+! must install ports/print/gsfonts or comment below
+xpdf.freeTypeControl: high
+xpdf.chineseCNSFont: -*-*-medium-r-normal-*-%s-*-*-*-*-*-big5-0
+! End ports/print/xpdf configuration
+
+! Begin security/putty pterm configuration
+! blink the cursor when the window is active
+pterm.BlinkCur: 1
+pterm.TermWidth: 143
+pterm.TermHeight: 50
+pterm.Font: 8x16
+!pterm.WideFont: kc15f
+!pterm.WideFont: -dynalab-mingliu-medium-r-normal--*-*-*-*-m-*-*
+!pterm.Font: xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true
+!pterm.BoldFont: xft:Bitstream Vera Sans Mono:pixelsize=12pt:autialias=true
+!pterm.WideFont: xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull
+!pterm.WideFont: kc8x15
+!pterm.WideFont: kc12x24
+!pterm.WideBoldFont: xft:MingLiU:pixelsize=12pt:antialias=true:hintstyle=hintfull
+!! End security/putty pterm configuration
+
