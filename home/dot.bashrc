@@ -51,6 +51,11 @@ if [ "$UNAME" = "Darwin" ]; then
 	export PERL5LIB="`append_path "$PERL5LIB" "$HOME/perl5/lib/perl5" "after"`";
 	export PERL5LIB="`append_path "$PERL5LIB" "/opt/zookeeper/lib/perl5/site_perl/5.10.0/darwin-thread-multi-2level/auto" "after"`";
 	export PERL5LIB="`append_path "$PERL5LIB" "/opt/zookeeper/lib/perl5/site_perl/5.10.0/darwin-thread-multi-2level" "after"`";
+
+	export PERL5OPT="$PERL5OPT -I$HOME/perl5/lib/perl5"
+	export PERL5OPT="$PERL5OPT -I/opt/zookeeper/lib/perl5/site_perl/5.10.0/darwin-thread-multi-2level/auto"
+	export PERL5OPT="$PERL5OPT -I/opt/zookeeper/lib/perl5/site_perl/5.10.0/darwin-thread-multi-2level"
+
 	# Make cpanm install to local.
 	export PERL_CPANM_OPT="--local-lib=$HOME/perl5"
 fi;
@@ -197,6 +202,13 @@ fi
 #if [ -d /Developer/usr/bin ]; then
 #	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
 #fi;
+
+if [ -d $HOME/perl5/bin ]; then
+	export PATH="`append_path "$PATH" "$HOME/perl5/bin" "before"`";
+#	if [ -z '`echo $PATH | grep -o '$HOME/bin'`' ]; then
+#		export PATH="$HOME/bin:$PATH";
+#	fi;
+fi
 
 if [ -d $HOME/bin ]; then
 	export PATH="`append_path "$PATH" "$HOME/bin" "before"`";
