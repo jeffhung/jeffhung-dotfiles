@@ -198,6 +198,8 @@ if [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
 
+alias irssi='env LC_ALL=zh_TW.UTF-8 irssi'
+
 [ -z "$MANPATH" ] && export MANPATH="/usr/share/man:/usr/local/man";
 
 if [ -d /Developer/usr/bin ]; then
