@@ -103,6 +103,7 @@ fi
 case "$TERM" in
 xterm-color) color_prompt=yes;;
 xterm-256color) color_prompt=yes;;
+screen)  color_prompt=yes;;
 screen-bce)  color_prompt=yes;;
 esac
 case "$COLORTERM" in
@@ -199,9 +200,9 @@ fi
 
 [ -z "$MANPATH" ] && export MANPATH="/usr/share/man:/usr/local/man";
 
-#if [ -d /Developer/usr/bin ]; then
-#	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
-#fi;
+if [ -d /Developer/usr/bin ]; then
+	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
+fi;
 
 if [ -d $HOME/perl5/bin ]; then
 	export PATH="`append_path "$PATH" "$HOME/perl5/bin" "before"`";
