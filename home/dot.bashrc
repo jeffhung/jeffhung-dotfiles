@@ -58,6 +58,9 @@ if [ "$UNAME" = "Darwin" ]; then
 
 	# Make cpanm install to local.
 	export PERL_CPANM_OPT="--local-lib=$HOME/perl5"
+
+	# pick npm libraries
+	export NODE_PATH="/usr/local/lib/node_modules"
 fi;
 
 export LC_ALL=en_US.UTF-8
@@ -126,23 +129,45 @@ if [ -n "$force_color_prompt" ]; then
 	fi
 fi
 
-git_prompt_info()
+scm_prompt_info()
 {
-	# branch name
-	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-	branch="${ref#refs/heads/}";
-	# since last commit (https://gist.github.com/897951)
-	last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
-	now=`date +%s`;
-	seconds=$((now-last_commit));
-	minutes=$((seconds/60));
-	hours=$((minutes/60));
-	minutes=$((minutes%60));
-	days=$((hours/24));
-	hours=$((hours%24));
-	since_last_commit="${days}d${hours}h${minutes}m";
-	# combine the above
-	echo ":${branch}:${since_last_commit}";
+	local type='';
+	local branch='';
+	local idled='';
+	local dirty='';
+	local ref;
+
+	ref=`git symbolic-ref HEAD 2> /dev/null`;
+	if [ $? = 0 ]; then
+		type='git';
+		branch="${ref#refs/heads/}";
+#		# since last commit (https://gist.github.com/897951)
+#		last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
+#		now=`date +%s`;
+#		seconds=$((now-last_commit));
+#		minutes=$((seconds/60));
+#		hours=$((minutes/60));
+#		minutes=$((minutes%60));
+#		days=$((hours/24));
+#		hours=$((hours%24));
+#		idled="${days}d${hours}h${minutes}m";
+		# check if dirty
+		git describe --always --dirty 2> /dev/null | grep -q -- '-dirty$';
+		[ $? = 0 ] && dirty='*';
+	fi;
+
+	ref=`hg branch 2> /dev/null`;
+	if [ $? = 0 ]; then
+		type='hg';
+		branch="$ref";
+	fi;
+
+	if [ -n "$type" ]; then
+		local scm="$type";
+		[ "x$branch" != x ] && scm="$scm:$branch";
+		[ "x$idled"  != x ] && scm="$scm:$idled";
+		echo ":$scm$dirty";
+	fi;
 }
 
 ps1_euser=`whoami`; # effective user name
@@ -153,18 +178,24 @@ if [ "$color_prompt" = yes ]; then
 fi;
 if [ -z "$WINDOW" ]; then
 	if [ "$USER" == "$ps1_euser" ]; then
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset][\t][\w\$(git_prompt_info)]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
 	else
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset]($ps1_euser)][\t][\w\$(git_prompt_info)]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset]($ps1_euser)][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
 	fi;
 else
 	if [ "$USER" == "$ps1_euser" ]; then
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w\$(git_prompt_info)]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
 	else
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset($ps1_euser):$ps1_bold$WINDOW$ps1_reset][\t][\w\$(git_prompt_info)]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset($ps1_euser):$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
 	fi;
 fi
 unset color_prompt force_color_prompt ps1_euser ps1_standout ps1_bold ps1_reset
+
+# Some segments e.g. cwd and cvs_branch needs to find the current working
+# directory of the active pane. To achive this we let tmux save the path each
+# time the bash prompt is displayed. Put this in your ~/.bashrc or where you
+# define you PS1 variable (I use and source ~/.bash_ps1):
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -202,9 +233,9 @@ alias irssi='env LC_ALL=zh_TW.UTF-8 irssi'
 
 [ -z "$MANPATH" ] && export MANPATH="/usr/share/man:/usr/local/man";
 
-if [ -d /Developer/usr/bin ]; then
-	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
-fi;
+#if [ -d /Developer/usr/bin ]; then
+#	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
+#fi;
 
 if [ -d $HOME/perl5/bin ]; then
 	export PATH="`append_path "$PATH" "$HOME/perl5/bin" "before"`";
@@ -317,9 +348,9 @@ alias csshX="env VERSIONER_PERL_PREFER_32_BIT=yes csshX"
 
 export PATH="`append_path "$PATH" "$HOME/wc/ADE/ADE/bin" "after"`";
 
-if [ -d "$HOME/local/lib/python2.6" ]; then
-	export PYTHONPATH="$HOME/local/lib/python2.6:$HOME/local/lib/python2.6/site-packages";
-fi;
+#if [ -d "$HOME/local/lib/python2.6" ]; then
+#	export PYTHONPATH="$HOME/local/lib/python2.6:$HOME/local/lib/python2.6/site-packages";
+#fi;
 
 if [ -d "$HOME/wc/tcloud-issues" ]; then
 	export DITRACK_ROOT="$HOME/wc/tcloud-issues";
@@ -329,3 +360,5 @@ if [ -d ~/perl5/perlbrew ]; then
 	source ~/perl5/perlbrew/etc/bashrc
 fi;
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
