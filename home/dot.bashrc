@@ -75,6 +75,9 @@ fi;
 #if [ -f /opt/local/etc/bash_completion ]; then
 #	. /opt/local/etc/bash_completion
 #fi
+if [ -f /usr/share/git-core/git-completion.bash ]; then
+	. /usr/share/git-core/git-completion.bash;
+fi;
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
