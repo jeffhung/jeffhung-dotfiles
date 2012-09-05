@@ -173,26 +173,71 @@ scm_prompt_info()
 	fi;
 }
 
+which vcprompt > /dev/null 2>&1;
+if [ $? != 0 ]; then
+vcprompt()
+{
+	local format=${VCPROMPT_FORMAT:-[%n:%b%m%u]}
+
+	# determine vc type
+	local vcname='';
+	local branch='';
+	local revision='';
+	local modified='';
+	local unknown='';
+	ref=`git symbolic-ref HEAD 2> /dev/null`;
+	if [ $? = 0 ]; then
+		vcname='git';
+		branch="${ref#refs/heads/}";
+		git describe --always --dirty 2> /dev/null | grep -q -- '-dirty$';
+		[ $? = 0 ] && modified='+';
+	fi;
+	ref=`hg branch 2> /dev/null`;
+	if [ $? = 0 ]; then
+		vcname='hg';
+		branch="$ref";
+	fi;
+
+	if [ -n "$vcname" ]; then
+		echo "$format" | sed \
+			-e "s/%n/$vcname/g" \
+			-e "s/%b/$branch/g" \
+			-e "s/%r/$revision/g" \
+			-e "s/%m/$modified/g" \
+			-e "s/%u/$unknown/g" \
+		;
+	fi;
+}
+fi;
+
+#export VCPROMPT_FORMAT=":%n:%b%m";
+export VCPROMPT_FORMAT="(%n:%b%m)";
+#ps1_vcprompt="\[\e[s\]\e\[\e[\$((LINES));\$((COLUMNS-\$(vcprompt|wc -c)+1))f\]$ps1_bold\$(vcprompt)$ps1_reset\[\e[u\]"
+
 ps1_euser=`whoami`; # effective user name
 if [ "$color_prompt" = yes ]; then
 	ps1_standout='\[\e[7m\]'
 	ps1_bold='\[\e[1m\]'
 	ps1_reset='\[\e[0m\]'
 fi;
+#export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!\$(vcprompt)]${debian_chroot:+($debian_chroot)}\$ "
 if [ -z "$WINDOW" ]; then
 	if [ "$USER" == "$ps1_euser" ]; then
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n\$(printf \"%\$((\$COLUMNS-1))s\x0d\" \"\$(vcprompt)\")$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset][\t][\w]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
 	else
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset]($ps1_euser)][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n\$(printf \"%\$((\$COLUMNS-1))s\x0d\" \"\$(vcprompt)\")$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset]($ps1_euser)][\t][\w]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
 	fi;
 else
 	if [ "$USER" == "$ps1_euser" ]; then
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n\$(printf \"%\$((\$COLUMNS-1))s\x0d\" \"\$(vcprompt)\")$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
 	else
-		export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset($ps1_euser):$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!\$(scm_prompt_info)]${debian_chroot:+($debian_chroot)}\$ "
+		export PS1="\n\$(printf \"%\$((\$COLUMNS-1))s\x0d\" \"\$(vcprompt)\")$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset($ps1_euser):$ps1_bold$WINDOW$ps1_reset][\t][\w]\n[\!]${debian_chroot:+($debian_chroot)}\$ "
 	fi;
 fi
-unset color_prompt force_color_prompt ps1_euser ps1_standout ps1_bold ps1_reset
+
+#export PS1="\n$ps1_standout\h$ps1_reset:[$ps1_bold$USER$ps1_reset:$ps1_bold$WINDOW$ps1_reset][\t][\w]\n\$(printf \"%\$((\$COLUMNS-1))s\x0d\" \"\$(vcprompt)\")[\!\$(vcprompt)]${debian_chroot:+($debian_chroot)}\$ "
+
+unset color_prompt force_color_prompt ps1_euser ps1_standout ps1_bold ps1_reset ps1_vcprompt
 
 # Some segments e.g. cwd and cvs_branch needs to find the current working
 # directory of the active pane. To achive this we let tmux save the path each
