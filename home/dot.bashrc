@@ -279,7 +279,7 @@ fi
 
 alias irssi='env LC_ALL=zh_TW.UTF-8 irssi'
 
-[ -z "$MANPATH" ] && export MANPATH="/usr/share/man:/usr/local/man";
+[ -z "$MANPATH" ] && export MANPATH="/usr/share/man:/usr/local/man:/usr/local/share/man";
 
 #if [ -d /Developer/usr/bin ]; then
 #	export PATH="`append_path "$PATH" "/Developer/usr/bin" "after"`";
