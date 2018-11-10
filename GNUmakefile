@@ -70,7 +70,7 @@ $(1):
 	@echo "[UENV] Install $(notdir $(1))";
 	@( \
 	cd $(dir $(1)); \
-	$(FORCE_LINK) $(abspath home/dot$(notdir $(1))) $(notdir $(1)); \
+	$(FORCE_LINK) $(abspath dot$(notdir $(1))) $(notdir $(1)); \
 	);
 endef
 $(foreach f,$(UENV_DOT_FILES),$(eval $(call UENV_DOT_FILE_RULES,$(f))))
