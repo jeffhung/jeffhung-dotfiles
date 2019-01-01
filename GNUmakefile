@@ -3,6 +3,7 @@ UENV_DOT_FILES += $(HOME)/.bashrc
 UENV_DOT_FILES += $(HOME)/.bitchxrc
 UENV_DOT_FILES += $(HOME)/.cshrc
 UENV_DOT_FILES += $(HOME)/.ctags
+UENV_DOT_FILES += $(HOME)/.gitconfig
 UENV_DOT_FILES += $(HOME)/.gitignore
 UENV_DOT_FILES += $(HOME)/.indent.pro
 UENV_DOT_FILES += $(HOME)/.inputrc
