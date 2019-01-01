@@ -78,8 +78,8 @@
 # See: https://git-scm.com/docs/git-config#_conditional_includes
 [includeIf "gitdir:~/works/spn/"]
 	path = ~/works/spn/gitconfig
-[includeIf "gitdir:~/wc/"]
-	path = ~/wc/gitconfig
+[includeIf "gitdir:~/works/mine/"]
+	path = ~/works/mine/gitconfig
 
 [core]
 	ignorecase = false
