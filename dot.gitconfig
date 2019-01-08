@@ -76,10 +76,12 @@
 	finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%_16s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
 
 # See: https://git-scm.com/docs/git-config#_conditional_includes
-[includeIf "gitdir:~/works/spn/"]
-	path = ~/works/spn/gitconfig
-[includeIf "gitdir:~/works/mine/"]
-	path = ~/works/mine/gitconfig
+[includeIf "gitdir:~/trend/spn-work/"]
+	path = ~/trend/spn-work/gitconfig
+[includeIf "gitdir:~/Dropbox/works/"]
+	path = ~/Dropbox/works/gitconfig
+[includeIf "gitdir:~/wc/"]
+	path = ~/wc/gitconfig
 
 [core]
 	ignorecase = false
