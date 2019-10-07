@@ -199,13 +199,13 @@ vcprompt()
 	fi;
 
 	if [ -n "$vcname" ]; then
-		echo "$format" | sed \
-			-e "s/%n/$vcname/g" \
-			-e "s/%b/$branch/g" \
-			-e "s/%r/$revision/g" \
-			-e "s/%m/$modified/g" \
-			-e "s/%u/$unknown/g" \
-		;
+		prompt="${format}";
+		prompt="${prompt//%n/${vcname}}";
+		prompt="${prompt//%b/${branch}}";
+		prompt="${prompt//%r/${revision}}";
+		prompt="${prompt//%m/${modified}}";
+		prompt="${prompt//%u/${unknown}}";
+		echo "$prompt";
 	fi;
 }
 fi;
