@@ -19,7 +19,8 @@ bell_msg 'Bell in window %n^G'
 #hardstatus alwayslastline '%{.bY}[%H]%{.bR} %?%-LW  %?%{..W}%n%f %t%{.bR}%?%+LW%?%=%{.bY}%0c:%s'
  hardstatus alwayslastline '%{.bY}[%H]%{.bR} %-Lw%{..W}%n%f %t%{.bR}%+Lw%=%{.bY}%0c:%s'
 
-shelltitle '% |TCSH'
+# jeffhung.20220805: BUG: the leading % does not work
+shelltitle '% |bash'
 
 # ----------------------------------------------------------------------------
 # Scrollback settings
