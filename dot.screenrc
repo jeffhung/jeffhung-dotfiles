@@ -40,13 +40,14 @@ defscrollback 9000
 
 # Use bright colors for bold text.  Most terminal emulators do this already.
 attrcolor b ".I" 
+# tell screen how to set colors. AB = background, AF=foreground 
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # Change default background-color-erase setting.  If "bce" is set to on, all
 # characters cleared by an erase/insert/scroll/clear operation will be
 # displayed in the current background color.  Otherwise the default background
 # color is used.
 defbce "on"
-#term screen-256color-bce
+term "screen-256color-bce"
 
 # ----------------------------------------------------------------------------
 # remove some stupid / dangerous key bindings
@@ -76,6 +77,9 @@ bind h
 # Same  as the c1 command except that the default setting for new windows
 # is changed. Initial setting is `on'.
 defc1 off
+
+# Default change the encoding to utf8.
+defutf8 on
 
 # jeffhung.20070426:
 # - new method: automatically switch between utf8/big5 mode while installing ~/.screenrc.
